@@ -4,9 +4,6 @@
 <script type="text/javascript" src="jquery.validate.js"></script>
 <script type="text/javascript">
 
-    // $(".checkbox1").on("change",function(){
-    //     var $this = $(this); // $this - это будет ваш чекбокс
-    // });
     function check1() {
         if ($(".checkbox1").is(":checked")) {
             $(".checkbox3").prop("checked", false);
@@ -51,6 +48,42 @@
         i < matrix.length && matrix != this.placeholder ? i++ : i = matrix.indexOf("*");
         setCursorPosition(i, this)
     }
+    document.addEventListener("DOMContentLoaded", function() {
+        var ids = ["name", "email", "phone", "comment"];
+        //var checkboxs = [".checkbox1", ".checkbox2", ".checkbox3"]
+        for (var id of ids) {
+            var input = document.getElementById(id);
+            input.value = localStorage.getItem(id);
+            (function(id, input) {
+                input.addEventListener("change", function() {
+                    localStorage.setItem(id, input.value);
+                });
+            })(id, input);
+        }
+
+        // for (var check of checkboxs) {
+        //     let checkBox = document.querySelector(check);
+        //     if(checkBox.id === "service1"){
+        //         let checkBox3 = document.querySelector(".checkbox3");
+        //         checkBox.onchange = () => localStorage.setItem(checkBox.id, checkBox.checked);
+        //         checkBox.checked = localStorage.getItem(checkBox.id) === "true";
+        //         checkBox3.checked = localStorage.getItem(checkBox3.id) === "false";
+        //     }else if(checkBox.id === "service3"){
+        //         let checkBox1 = document.querySelector(".checkbox1");
+        //         checkBox.onchange = () => localStorage.setItem(checkBox.id, checkBox.checked);
+        //         checkBox.checked = localStorage.getItem(checkBox.id) === "true";
+        //         checkBox1.checked = localStorage.getItem(checkBox1.id) === "false";
+        //     }
+        //     checkBox.onchange = () => localStorage.setItem(checkBox.id, checkBox.checked);
+        //     checkBox.checked = localStorage.getItem(checkBox.id) === "true";
+        // }
+    });
+
+    // document.querySelectorAll(".services").forEach(el => {
+    //     el.onchange = () => localStorage.setItem(el.id, el.checked);
+    //     el.checked = localStorage.getItem(el.id) === "true";
+    // })
+
     window.addEventListener("DOMContentLoaded", function() {
         var input = document.querySelector("#phone");
         input.addEventListener("input", mask, false);
